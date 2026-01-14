@@ -11,4 +11,5 @@
 | stevemullerworth | Steve Mullerworth | Met Office  | 2026-01-08 |
 | harry-shepherd  | Harry Shepherd   | Met Office  | 2026-01-08 |
 | EdHone          | Ed Hone          | Met Office  | 2026-01-09 |
+| mo-lucy-gordon  | Lucy Gordon      | Met Office  | 2026-01-14 |
 
