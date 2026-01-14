@@ -15,6 +15,7 @@ import os
 import subprocess
 import sys
 
+
 def launch_fortitude(config_path, app_path):
     """
     Launch fortitude as a subprocess command and check the output
@@ -25,6 +26,7 @@ def launch_fortitude(config_path, app_path):
 
     print(result.stdout)
     return result
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -60,7 +62,8 @@ if __name__ == "__main__":
         app_path = os.path.join(args.source, app)
         config_path = os.path.join(app_path, "fortitude.toml")
         if not os.path.exists(os.path.join(config_path)):
-            print("Using universal config (toml) file. (Some apps use their own config file.)")
+            print('''Using universal config (toml) file.
+                  (Some apps use their own config file.)''')
             config_path = os.path.join(
                 args.source,
                 "rose-stem",
@@ -69,20 +72,27 @@ if __name__ == "__main__":
                 "file",
                 "fortitude.toml",
             )
+
         result = launch_fortitude(config_path, app_path)
         if result.returncode:
-            print(f"Checking: {app} \n", file=sys.stderr) #prints the app run on if there are errors of any kind
+            # prints the app run on if there are errors of any kind
+            print(f"Checking: {app} \n", file=sys.stderr)
             if not result.stderr:
-                print("Found lint errors:", file=sys.stderr)# prints if no other/config errors are found
-                print(result.stdout, file=sys.stderr)    #prints the lint errors
+                # prints if no other/config errors are found
+                print("Found lint errors:", file=sys.stderr)
+                # prints the lint errors
+                print(result.stdout, file=sys.stderr)
             if result.stderr:
-                print("Found non-lint errors: \n", file=sys.stderr) #prints if there are other/config errors
-                print(result.stderr, "\n\n\n", file=sys.stderr) #prints the other/config error
+                # prints if there are other/config errors
+                print("Found non-lint errors: \n", file=sys.stderr)
+                # prints the other/config error
+                print(result.stderr, "\n\n\n", file=sys.stderr)
             failed_apps[app] = result.stderr
 
     if failed_apps:
         error_message = ""
-        print("\n\n\nSummary: Fortitude found errors in the following repositories:\n", file=sys.stderr)
+        print('''\n\n\nSummary: Fortitude found errors in
+              the following repositories:\n''', file=sys.stderr)
         for failed in failed_apps:
             error_message += f"{failed}\n"
         sys.exit(error_message)
