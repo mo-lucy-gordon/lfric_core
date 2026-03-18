@@ -1,20 +1,4 @@
 # Contributors
-<<<<<<< adding_fortitude
-| GitHub user     | Real Name        | Affiliation | Date       |
-| --------------- | ---------------- | ----------- | ---------- |
-| andrewcoughtrie | Andrew Coughtrie | Met Office  | 2025.12.12 |
-| james-bruten-mo | James Bruten     | Met Office  | 2025-12-09 |
-| jennyhickson    | Jenny Hickson    | Met Office  | 2025-12-10 |
-| mo-marqh        | Mark Hedley      | Met Office  | 2025-12-11 |
-| mike-hobson     | Mike Hobson      | Met Office  | 2025-12-17 |
-| MatthewHambley  | Matthew Hambley  | Met Office  | 2025-12-15 |
-| yaswant         | Yaswant Pradhan  | Met Office  | 2025-12-16 |
-| stevemullerworth | Steve Mullerworth | Met Office  | 2026-01-08 |
-| harry-shepherd  | Harry Shepherd   | Met Office  | 2026-01-08 |
-| EdHone          | Ed Hone          | Met Office  | 2026-01-09 |
-| mo-lucy-gordon  | Lucy Gordon      | Met Office  | 2026-01-14 |
-=======
->>>>>>> main
 
 | GitHub user      | Real Name              | Affiliation | Date       |
 | ---------------- | ---------------------- | ----------- | ---------- |
@@ -39,3 +23,4 @@
 | jcsmeto          | James Cunningham-Smith | Met Office  | 2026-02-06 |
 | thomasmelvin     | Thomas Melvin          | Met Office  | 2026-01-15 |
 | ericaneininger   | Erica Neininger        | Met Office  | 2026-03-02 |
+| mo-lucy-gordon   | Lucy Gordon            | Met Office  | 2026-03-18 |
