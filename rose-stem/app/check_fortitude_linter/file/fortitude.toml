@@ -6,10 +6,55 @@
 
 [check]
 
-file-extensions= ["f90", "F90", "X90",  "x90"]          #check these file types
+file-extensions= ["f90", "F90", "X90", "x90"]       #check these file types
 
 
-select = ["C121"]
+# select = ["C121"]
+
+select = ["E000", "E001", "C001", "C021", "C022", "C031", "C032", "C043",
+"C051", "C071", "C072", "C081", "C091", "C082", "C092", "C121",
+"C132", "C141", "OB011", "OB021", "OB051", "OB061", "MOD001", "MOD021",
+"S101", "S071", "PORT011", "PORT012", "PORT021", "FORT001",
+"FORT002", "FORT003", "FORT004", "FORT005"]
 
 
-output-format = "grouped"                #group results by file
+# output-format = "grouped"              #group results by file
+output-format = "full"
+
+[check.per-file-ignores] #don't run these rules on these files:
+
+# infrastructure/source:
+"constants_mod.F90" = ["MOD001", "C022"]
+"lfric_mpi_mod.F90" = ["E001"]
+"random_number_generator_mod.f90" = ["C022"]
+
+# components/science:
+"sci_psykal_builtin_light_mod.f90" = ["C132"]
+
+# infrastructure/source:
+"polynomial_mod.f90" = ["C132"]
+"namelist_item_mod.f90" = ["C072"]
+"namelist_mod.F90" = ["C072"]
+"io_utility_mod.f90" = ["C072"]
+"ncdf_quad_mod.F90" = ["C072"]
+"ugrid_2d_mod.F90" = ["C072"]
+"ugrid_file_mod.F90" = ["C072"]
+"key_value_collection_mod.f90" = ["C072"]
+"local_mesh_mod.f90" = ["C081"]
+"log_mod.F90" = ["C081"]
+
+# components/lfric-xios:
+"lfric_xios_mock_mod.f90" = ["C072"]
+"lfric_xios_process_output_mod.f90" = ["C081"]
+"lfric_xios_setup_mod.x90" = ["C081"]
+
+# components/science: 
+"get_unit_test_planar_mesh_mod.f90" = ["C081"]
+"get_unit_test_qfaces_mod.f90" = ["C081"]
+"sci_psykal_light_mod.f90" = ["C132"]
+
+# mesh_tools/source:
+"calc_global_cell_map_mod.F90" = ["C081"]
+"gen_lbc_mod.F90" = ["C081"]
+"gen_planar_mod.F90" = ["C081"]
+"gencube_ps_mod.F90" = ["C081"]
