@@ -46,11 +46,6 @@ output-format = "grouped"              #group results by file
 "constants_mod.F90" = ["MOD001", "C022"]
 "lfric_mpi_mod.F90" = ["E001"]
 "random_number_generator_mod.f90" = ["C022"]
-
-# components/science:
-"sci_psykal_builtin_light_mod.f90" = ["C132"]
-
-# infrastructure/source:
 "polynomial_mod.f90" = ["C132"]
 "namelist_item_mod.f90" = ["C072"]
 "namelist_mod.F90" = ["C072"]
@@ -70,6 +65,9 @@ output-format = "grouped"              #group results by file
 "epsilon_one_submod.f90" = ["C022"]
 "eta_mod.F90" = ["C022"]
 "one.f90" = ["C022"]
+
+# components/science:
+"sci_psykal_builtin_light_mod.f90" = ["C132"]
 
 # components/lfric-xios:
 "lfric_xios_mock_mod.f90" = ["C072"]
