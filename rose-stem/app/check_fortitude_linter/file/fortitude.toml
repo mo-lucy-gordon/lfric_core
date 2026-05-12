@@ -15,7 +15,7 @@ select = ["E000", "E001", "C001", "C021", "C022", "C031", "C032", "C043",
 "S101", "S071", "PORT011", "PORT012", "PORT021", "FORT001",
 "FORT002", "FORT003", "FORT004", "FORT005"]
 
-output-format = "full"              #group results by file
+output-format = "grouped"              #group results by file
 
 
 # List of what the rules used are checking for:
