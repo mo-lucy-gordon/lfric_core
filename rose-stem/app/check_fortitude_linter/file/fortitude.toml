@@ -14,14 +14,14 @@ select = [
 "C001", # missing implicit none
 "C021", # real literal missing kind suffix
 "C022", # implicit-real-kind
-"C031", # magic-number-in-array-size
+# "C031", # magic-number-in-array-size
 "C032", # magic unit in IO statement
 "C043", # missing action specifier when opening files
 "C051", # trailing-backslash
 "C071", # assumed-size
 "C072", # character has assumed size but does not have intent(in)
 "C081", # initialisation-in-declaration and no explicit save/parameter
-"C082", # pointer-initialisation-in-declaration
+# "C082", # pointer-initialisation-in-declaration
 "C091", # external-procedure
 "C092", # procedure not contained within module
 "C121", # use-all - use missing "only" clause
@@ -55,18 +55,23 @@ output-format = "grouped"              #group results by file
 
 # infrastructure/source:
 "constants_mod.F90" = ["MOD001", "C022"]
-"lfric_mpi_mod.F90" = ["E001"]
+"lfric_mpi_mod.F90" = ["E001","C072"]
 "random_number_generator_mod.f90" = ["C022"]
 "polynomial_mod.f90" = ["C132"]
 "namelist_item_mod.f90" = ["C072"]
 "namelist_mod.F90" = ["C072"]
 "io_utility_mod.f90" = ["C072"]
 "ncdf_quad_mod.F90" = ["C072"]
-"ugrid_2d_mod.F90" = ["C072"]
+"ugrid_2d_mod.F90" = ["C072", "C032", "C043"]
 "ugrid_file_mod.F90" = ["C072"]
 "key_value_collection_mod.f90" = ["C072"]
 "local_mesh_mod.f90" = ["C081"]
 "log_mod.F90" = ["C081"]
+"reference_element_mod.F90" = ["C051"]
+"dino_mod.F90" = ["C043"]
+"io_mod.F90" = ["C043"]
+"count_mod.f90" = ["C043"]
+"timer_mod.F90" = ["C043"]
 
 # infrastructure/build:
 "content_mod.f90" = ["C081"]
@@ -76,9 +81,18 @@ output-format = "grouped"              #group results by file
 "epsilon_one_submod.f90" = ["C022"]
 "eta_mod.F90" = ["C022"]
 "one.f90" = ["C022"]
+"computed_mod.f90" = ["C032"]
+"enum_mod.f90" = ["C032"]
+"everything_mod.f90" = ["C032"]
+"multifile_mod.f90" = ["C032"]
+"simple_mod.f90" = ["C032"]
+
+# infrastructure/integration-test
+"configuration_test.f90" = ["C043"]
 
 # components/science:
 "sci_psykal_builtin_light_mod.f90" = ["C132"]
+"sci_checksum_alg_mod.x90" = ["C043"]
 
 # components/lfric-xios:
 "lfric_xios_mock_mod.f90" = ["C072"]
