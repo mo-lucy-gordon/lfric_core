@@ -14,14 +14,12 @@ select = [
 "C001", # missing implicit none
 "C021", # real literal missing kind suffix
 "C022", # implicit-real-kind
-# "C031", # magic-number-in-array-size
 "C032", # magic unit in IO statement
 "C043", # missing action specifier when opening files
 "C051", # trailing-backslash
 "C071", # assumed-size
 "C072", # character has assumed size but does not have intent(in)
 "C081", # initialisation-in-declaration and no explicit save/parameter
-# "C082", # pointer-initialisation-in-declaration
 "C091", # external-procedure
 "C092", # procedure not contained within module
 "C121", # use-all - use missing "only" clause
