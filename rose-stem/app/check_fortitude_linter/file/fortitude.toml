@@ -23,14 +23,18 @@ select = [
 "C091", # external-procedure
 "C092", # procedure not contained within module
 "C121", # use-all - use missing "only" clause
+"C122", # 'use' for intrinsic module missing 'intrinsic' modifier
 "C132", # default-public-accessibility
 "C141", # missing-exit-or-cycle-label
+"C143", # missing-end-label
+"C151", # misleading-inline-if-semicolon
 "OB011", # common-block, obsolescent
 "OB021", # entry-statement, obsolescent
 "OB051", # pause-statement, deleted feature
 "OB061", # deprecated-character-syntax
 "MOD001", # don't use double-precision
 "MOD021", # deprecated-relational-operator
+# "MOD041", # don't split up attribute specification statements
 "S101", # trailing-whitespace
 "S071", # missing-double-colon
 "PORT011", # literal-kind
