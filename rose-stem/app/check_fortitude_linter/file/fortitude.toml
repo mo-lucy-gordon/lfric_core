@@ -34,7 +34,7 @@ select = [
 "OB061", # deprecated-character-syntax
 "MOD001", # don't use double-precision
 "MOD021", # deprecated-relational-operator
-# "MOD041", # don't split up attribute specification statements
+"MOD041", # don't split up attribute specification statements
 "S101", # trailing-whitespace
 "S071", # missing-double-colon
 "PORT011", # literal-kind
