@@ -146,9 +146,10 @@ contains
         jd = id - ncells_2d
 
         do j=1, nfaces_h ! Only over vertical faces
-          if (cell_next(j,jd) /= 0) &
-                    cell_next(j,id) = cell_next(j,jd) + &
+          if (cell_next(j,jd) /= 0) then
+            cell_next(j,id) = cell_next(j,jd) + &
                                               ncells_2d
+          end if
         end do
 
         cell_next(nfaces_h + 1, id) = id - ncells_2d

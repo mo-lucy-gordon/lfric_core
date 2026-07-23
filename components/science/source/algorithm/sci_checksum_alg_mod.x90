@@ -113,14 +113,18 @@ contains
       if (stat /= 0) then
         call log_event( "Unable to open checksum file", LOG_LEVEL_ERROR )
       end if
-      if ( present(field1) .and. present(name1) ) &
+      if ( present(field1) .and. present(name1) ) then
         write(unit, '(A,A,A,Z16)' ) kgo_str,trim(name1),' = ',chksum1
-      if ( present(field2) .and. present(name2) ) &
+      end if
+      if ( present(field2) .and. present(name2) ) then
         write(unit, '(A,A,A,Z16)' ) kgo_str,trim(name2),' = ',chksum2
-      if ( present(field3) .and. present(name3) ) &
+      end if
+      if ( present(field3) .and. present(name3) ) then
         write(unit, '(A,A,A,Z16)' ) kgo_str,trim(name3),' = ',chksum3
-      if ( present(field4) .and. present(name4) ) &
+      end if
+      if ( present(field4) .and. present(name4) ) then
         write(unit, '(A,A,A,Z16)' ) kgo_str,trim(name4),' = ',chksum4
+      end if
       if ( present(field_bundle) .and. present(bundle_name) ) then
         do ibundle=1,bundle_size
           write(unit, '(A,A,I1,A,Z16)' ) &

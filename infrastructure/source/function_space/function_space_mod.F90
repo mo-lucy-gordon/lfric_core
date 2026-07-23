@@ -539,8 +539,9 @@ contains
     if (allocated(self%basis_x))        deallocate(self%basis_x)
     if (allocated(self%basis_z))        deallocate(self%basis_z)
     if (allocated(self%nodal_coords))   deallocate(self%nodal_coords)
-    if (allocated(self%dof_on_vert_boundary)) &
-                                        deallocate(self%dof_on_vert_boundary)
+    if (allocated(self%dof_on_vert_boundary)) then
+      deallocate(self%dof_on_vert_boundary)
+    end if
     if (allocated(self%entity_dofs))    deallocate(self%entity_dofs)
 
     allocate(self%basis_index( 3, self%ndof_cell ))
@@ -1582,11 +1583,13 @@ contains
     if (allocated(self%basis_z))          deallocate(self%basis_z)
     if (allocated(self%last_dof_halo))    deallocate(self%last_dof_halo)
     if (allocated(self%fractional_levels))deallocate(self%fractional_levels)
-    if (allocated(self%dof_on_vert_boundary))   &
-                                          deallocate(self%dof_on_vert_boundary)
+    if (allocated(self%dof_on_vert_boundary)) then
+      deallocate(self%dof_on_vert_boundary)
+    end if
     if (allocated(self%dof_cell_owner))   deallocate(self%dof_cell_owner)
-    if (allocated(self%dof_column_height))      &
-                                          deallocate(self%dof_column_height)
+    if (allocated(self%dof_column_height)) then
+      deallocate(self%dof_column_height)
+    end if
 
     call self%master_dofmap%clear()
     call self%dofmap_list%clear()

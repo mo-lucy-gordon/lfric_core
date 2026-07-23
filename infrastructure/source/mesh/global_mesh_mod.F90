@@ -406,9 +406,10 @@ contains
     end do
 
     ! Initialise values in this objects global mesh maps collection.
-    if (.not. allocated(self%global_mesh_maps) ) &
-        allocate ( self%global_mesh_maps,        &
+    if (.not. allocated(self%global_mesh_maps) ) then
+      allocate ( self%global_mesh_maps,        &
                     source = global_mesh_map_collection_type() )
+    end if
 
   end function global_mesh_constructor
 

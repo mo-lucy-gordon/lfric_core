@@ -358,9 +358,10 @@ subroutine calc_adjacency(gen_cube, cell_next)
 
 
   allocate(cell_next(4, ncells), stat=astat)
-  if (astat /= 0)                                               &
-      call log_event( PREFIX//"Failure to allocate cell_next.", &
+  if (astat /= 0) then
+    call log_event( PREFIX//"Failure to allocate cell_next.", &
                       LOG_LEVEL_ERROR )
+  end if
 
   allocate(panel_edge_cells_west(edge_cells))
   allocate(panel_edge_cells_south(edge_cells))
@@ -571,9 +572,10 @@ subroutine calc_face_to_vert(gen_cube, verts_on_cell)
 
   allocate(verts_on_cell(4, 6*cpp), stat=astat)
 
-  if (astat /= 0)                                                   &
-      call log_event( PREFIX//"Failure to allocate verts_on_cell.", &
+  if (astat /= 0) then
+    call log_event( PREFIX//"Failure to allocate verts_on_cell.", &
                       LOG_LEVEL_ERROR )
+  end if
 
   verts_on_cell = 0
   cell = 1
@@ -732,15 +734,17 @@ subroutine calc_edges(gen_cube, edges_on_cell, verts_on_edge)
 
   allocate(edges_on_cell(4, ncells), stat=astat)
 
-  if (astat /= 0)                                                   &
-      call log_event( PREFIX//"Failure to allocate edges_on_cell.", &
+  if (astat /= 0) then
+    call log_event( PREFIX//"Failure to allocate edges_on_cell.", &
                       LOG_LEVEL_ERROR )
+  end if
 
   allocate(verts_on_edge(2, 2*ncells), stat=astat)
 
-  if (astat /= 0)                                                   &
-      call log_event( PREFIX//"Failure to allocate verts_on_edge.", &
+  if (astat /= 0) then
+    call log_event( PREFIX//"Failure to allocate verts_on_edge.", &
                       LOG_LEVEL_ERROR )
+  end if
 
   edges_on_cell = 0
   verts_on_edge = 0
@@ -913,9 +917,10 @@ subroutine calc_coords(gen_cube, vert_coords, coord_units_x, coord_units_y)
 
   allocate(vert_coords(2, nverts), stat=astat)
 
-  if (astat /= 0)                                                 &
-      call log_event( PREFIX//"Failure to allocate vert_coords.", &
+  if (astat /= 0) then
+    call log_event( PREFIX//"Failure to allocate vert_coords.", &
                       LOG_LEVEL_ERROR )
+  end if
 
   vert_coords = 0.0_r_def
   dlambda = 0.5_r_def*PI/edge_cells  ! dlamba in radians
@@ -1883,8 +1888,9 @@ subroutine get_metadata( self,               &
 
   if (present(north_pole))     north_pole(:)  = radians_to_degrees * self%north_pole(:)
   if (present(null_island))    null_island(:) = radians_to_degrees * self%null_island(:)
-  if (present(equatorial_latitude)) &
-                          equatorial_latitude = radians_to_degrees * self%equatorial_latitude
+  if (present(equatorial_latitude)) then
+    equatorial_latitude = radians_to_degrees * self%equatorial_latitude
+  end if
 
   if (present(constructor_inputs)) constructor_inputs = trim(self%constructor_inputs)
 

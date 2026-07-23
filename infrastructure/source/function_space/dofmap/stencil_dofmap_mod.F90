@@ -127,8 +127,9 @@ function stencil_dofmap_constructor(st_shape, st_depth, ndf, mesh, master_dofmap
 
   ! Since this routine is only valid for quadrilateral elements throw an error
   ! if the number of (horizontal) neighbours is not four
-  if ( number_of_neighbours /= 4_i_def ) &
-  call log_event( 'Stencil dofmaps only valid for quad elements', LOG_LEVEL_ERROR )
+  if ( number_of_neighbours /= 4_i_def ) then
+    call log_event( 'Stencil dofmaps only valid for quad elements', LOG_LEVEL_ERROR )
+  end if
 
   ! Get direction map for the requested stencil shape
   allocate( direction_map(number_of_neighbours) )

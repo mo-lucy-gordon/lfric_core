@@ -896,10 +896,11 @@ contains
             if(oth2>3)oth2=oth2-3
             if(cell_next(N)/=cells(oth1) .and. cell_next(N)/=cells(oth2) .and. &
               cell_next(E)/=cells(oth1) .and. cell_next(E)/=cells(oth2) ) then
-              if(panel > num_panels) &
+              if(panel > num_panels) then
                 call log_event( 'Failed to partition the mesh: '// &
                   'the global mesh has more panels than the partitioner '// &
                   'is expecting.', LOG_LEVEL_ERROR )
+              end if
               sw_corner_cells(panel)=cells(j)
               panel=panel+1
             end if

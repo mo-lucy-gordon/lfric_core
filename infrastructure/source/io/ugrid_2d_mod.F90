@@ -313,22 +313,28 @@ subroutine allocate_arrays(self, generator_strategy)
 
 
 
-  if ( allocated( self%node_coordinates ) )       &
-                                     deallocate( self%node_coordinates )
-  if ( allocated( self%face_coordinates ) )       &
-                                     deallocate( self%face_coordinates )
+  if ( allocated( self%node_coordinates ) ) then
+    deallocate( self%node_coordinates )
+  end if
+  if ( allocated( self%face_coordinates ) ) then
+    deallocate( self%face_coordinates )
+  end if
 
-  if ( allocated( self%edge_node_connectivity ) ) &
-                                     deallocate( self%edge_node_connectivity )
+  if ( allocated( self%edge_node_connectivity ) ) then
+    deallocate( self%edge_node_connectivity )
+  end if
 
-  if ( allocated( self%face_node_connectivity ) ) &
-                                     deallocate( self%face_node_connectivity )
+  if ( allocated( self%face_node_connectivity ) ) then
+    deallocate( self%face_node_connectivity )
+  end if
 
-  if ( allocated( self%face_edge_connectivity ) ) &
-                                     deallocate( self%face_edge_connectivity )
+  if ( allocated( self%face_edge_connectivity ) ) then
+    deallocate( self%face_edge_connectivity )
+  end if
 
-  if ( allocated( self%face_face_connectivity ) ) &
-                                     deallocate( self%face_face_connectivity )
+  if ( allocated( self%face_face_connectivity ) ) then
+    deallocate( self%face_face_connectivity )
+  end if
 
   allocate(self%node_coordinates(2, self%num_nodes))
   allocate(self%face_coordinates(2, self%num_faces))
@@ -364,25 +370,32 @@ subroutine allocate_arrays_for_file(self)
   ! Arguments
   type(ugrid_2d_type),    intent(inout) :: self
 
-  if ( allocated( self%node_coordinates ) )       &
-                                     deallocate( self%node_coordinates )
-  if ( allocated( self%face_coordinates ) )       &
-                                     deallocate( self%face_coordinates )
+  if ( allocated( self%node_coordinates ) ) then
+    deallocate( self%node_coordinates )
+  end if
+  if ( allocated( self%face_coordinates ) ) then
+    deallocate( self%face_coordinates )
+  end if
 
-  if ( allocated( self%edge_node_connectivity ) ) &
-                                     deallocate( self%edge_node_connectivity )
+  if ( allocated( self%edge_node_connectivity ) ) then
+    deallocate( self%edge_node_connectivity )
+  end if
 
-  if ( allocated( self%face_node_connectivity ) ) &
-                                     deallocate( self%face_node_connectivity )
+  if ( allocated( self%face_node_connectivity ) ) then
+    deallocate( self%face_node_connectivity )
+  end if
 
-  if ( allocated( self%face_edge_connectivity ) ) &
-                                     deallocate( self%face_edge_connectivity )
+  if ( allocated( self%face_edge_connectivity ) ) then
+    deallocate( self%face_edge_connectivity )
+  end if
 
-  if ( allocated( self%face_face_connectivity ) ) &
-                                     deallocate( self%face_face_connectivity )
+  if ( allocated( self%face_face_connectivity ) ) then
+    deallocate( self%face_face_connectivity )
+  end if
 
-  if ( allocated( self%target_mesh_names ) ) &
-                                     deallocate( self%target_mesh_names )
+  if ( allocated( self%target_mesh_names ) ) then
+    deallocate( self%target_mesh_names )
+  end if
 
   allocate(self%node_coordinates(2, self%num_nodes))
   allocate(self%face_coordinates(2, self%num_faces))

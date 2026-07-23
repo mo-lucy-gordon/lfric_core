@@ -171,15 +171,19 @@ contains
     integer(kind=i_def), allocatable, dimension(:),   intent(out) :: ind_map_to, ind_map_from
     integer(kind=i_def),                              intent(in)  :: nlayers, ndf_to, ndf_from, nrow, ncol
 
-    if(.not. allocated(col_bmap_to)) &
-         allocate(col_bmap_to(ndf_to, nlayers))
-    if(.not. allocated(col_bmap_from)) &
-         allocate(col_bmap_from(ndf_from, nlayers))
+    if(.not. allocated(col_bmap_to)) then
+      allocate(col_bmap_to(ndf_to, nlayers))
+    end if
+    if(.not. allocated(col_bmap_from)) then
+      allocate(col_bmap_from(ndf_from, nlayers))
+    end if
 
-    if (.not. allocated(ind_map_to)) &
-         allocate(ind_map_to(nrow))
-    if(.not. allocated(ind_map_from)) &
-         allocate(ind_map_from(ncol))
+    if (.not. allocated(ind_map_to)) then
+      allocate(ind_map_to(nrow))
+    end if
+    if(.not. allocated(ind_map_from)) then
+      allocate(ind_map_from(ncol))
+    end if
 
   end subroutine allocate_maps
 

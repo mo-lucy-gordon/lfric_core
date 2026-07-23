@@ -635,12 +635,14 @@ contains
       end do
     end do
 
-    if (.not. allocated(self%mesh_maps) ) &
-        allocate ( self%mesh_maps, source = mesh_map_collection_type() )
+    if (.not. allocated(self%mesh_maps) ) then
+      allocate ( self%mesh_maps, source = mesh_map_collection_type() )
+    end if
 
-    if ( .not. allocated(self%face_id_in_adjacent_cell) )           &
+    if ( .not. allocated(self%face_id_in_adjacent_cell) ) then
       allocate ( self%face_id_in_adjacent_cell( self%nedges_per_2d_cell, &
                                                 self%ncells_2d_with_ghost) )
+    end if
 
     call calc_face_id_in_adjacent_cell(                                                 &
                                   self%face_id_in_adjacent_cell,                        &
@@ -1404,8 +1406,9 @@ contains
     num_owned_edges = 0
     do icell=1, self%get_last_edge_cell()
       do iedge=1, self%get_nedges_per_cell_2d()
-        if ( self%get_edge_cell_owner( iedge, icell ) == icell) &
-                                    num_owned_edges = num_owned_edges + 1
+        if ( self%get_edge_cell_owner( iedge, icell ) == icell) then
+          num_owned_edges = num_owned_edges + 1
+        end if
       end do
     end do
 
@@ -1429,8 +1432,9 @@ contains
     num_owned_verts = 0
     do icell=1, self%get_last_edge_cell()
       do ivert=1, self%get_nverts_per_cell_2d()
-        if ( self%get_vertex_cell_owner( ivert, icell ) == icell) &
-                                    num_owned_verts = num_owned_verts + 1
+        if ( self%get_vertex_cell_owner( ivert, icell ) == icell) then
+          num_owned_verts = num_owned_verts + 1
+        end if
       end do
     end do
 
@@ -2696,34 +2700,47 @@ contains
     if (allocated(self%cells_in_colour))   deallocate( self%cells_in_colour )
     if (allocated(self%mesh_maps))         deallocate( self%mesh_maps )
 
-    if (allocated(self%ncells_per_colour_subset))   &
-                                  deallocate( self%ncells_per_colour_subset )
-    if (allocated(self%last_inner_cell_per_colour)) &
-                                  deallocate( self%last_inner_cell_per_colour )
-    if (allocated(self%last_halo_cell_per_colour))  &
-                                  deallocate( self%last_halo_cell_per_colour )
-    if (allocated(self%last_edge_cell_per_colour))  &
-                                  deallocate( self%last_edge_cell_per_colour )
-    if (allocated(self%face_id_in_adjacent_cell))   &
-                                  deallocate( self%face_id_in_adjacent_cell )
+    if (allocated(self%ncells_per_colour_subset)) then
+      deallocate( self%ncells_per_colour_subset )
+    end if
+    if (allocated(self%last_inner_cell_per_colour)) then
+      deallocate( self%last_inner_cell_per_colour )
+    end if
+    if (allocated(self%last_halo_cell_per_colour)) then
+      deallocate( self%last_halo_cell_per_colour )
+    end if
+    if (allocated(self%last_edge_cell_per_colour)) then
+      deallocate( self%last_edge_cell_per_colour )
+    end if
+    if (allocated(self%face_id_in_adjacent_cell)) then
+      deallocate( self%face_id_in_adjacent_cell )
+    end if
 
     if (allocated(self%ntiles_per_colour)) deallocate(self%ntiles_per_colour)
-    if (allocated(self%ncells_per_coloured_tile))          &
-                              deallocate(self%ncells_per_coloured_tile)
-    if (allocated(self%cells_in_coloured_tile))            &
-                              deallocate(self%cells_in_coloured_tile)
-    if (allocated(self%last_inner_tile_per_colour))   &
-                              deallocate(self%last_inner_tile_per_colour)
-    if (allocated(self%last_edge_tile_per_colour))   &
-                              deallocate(self%last_edge_tile_per_colour)
-    if (allocated(self%last_halo_tile_per_colour))         &
-                              deallocate(self%last_halo_tile_per_colour)
-    if (allocated(self%last_inner_cell_per_coloured_tile)) &
-                              deallocate(self%last_inner_cell_per_coloured_tile)
-    if (allocated(self%last_halo_cell_per_coloured_tile))  &
-                              deallocate(self%last_halo_cell_per_coloured_tile)
-    if (allocated(self%last_edge_cell_per_coloured_tile))  &
-                              deallocate(self%last_edge_cell_per_coloured_tile)
+    if (allocated(self%ncells_per_coloured_tile)) then
+      deallocate(self%ncells_per_coloured_tile)
+    end if
+    if (allocated(self%cells_in_coloured_tile)) then
+      deallocate(self%cells_in_coloured_tile)
+    end if
+    if (allocated(self%last_inner_tile_per_colour)) then
+      deallocate(self%last_inner_tile_per_colour)
+    end if
+    if (allocated(self%last_edge_tile_per_colour)) then
+      deallocate(self%last_edge_tile_per_colour)
+    end if
+    if (allocated(self%last_halo_tile_per_colour)) then
+      deallocate(self%last_halo_tile_per_colour)
+    end if
+    if (allocated(self%last_inner_cell_per_coloured_tile)) then
+      deallocate(self%last_inner_cell_per_coloured_tile)
+    end if
+    if (allocated(self%last_halo_cell_per_coloured_tile)) then
+      deallocate(self%last_halo_cell_per_coloured_tile)
+    end if
+    if (allocated(self%last_edge_cell_per_coloured_tile)) then
+      deallocate(self%last_edge_cell_per_coloured_tile)
+    end if
 
     return
   end subroutine clear
@@ -4093,12 +4110,14 @@ contains
                  self%domain%minimum_lonlat(axis=3), &
                  self%domain%maximum_lonlat(axis=3) )
 
-    if (.not. allocated(self%mesh_maps)) &
-        allocate ( self%mesh_maps,       &
+    if (.not. allocated(self%mesh_maps)) then
+      allocate ( self%mesh_maps,       &
                    source = mesh_map_collection_type() )
+    end if
 
-    if ( .not. allocated( self%face_id_in_adjacent_cell ) ) &
-        allocate ( self%face_id_in_adjacent_cell(4, self%ncells_2d) )
+    if ( .not. allocated( self%face_id_in_adjacent_cell ) ) then
+      allocate ( self%face_id_in_adjacent_cell(4, self%ncells_2d) )
+    end if
 
     call calc_face_id_in_adjacent_cell( self%face_id_in_adjacent_cell, &
                                         4, &

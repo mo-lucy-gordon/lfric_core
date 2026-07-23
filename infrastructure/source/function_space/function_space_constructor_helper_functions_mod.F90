@@ -930,8 +930,9 @@ contains
           lz(idx) = j(j2l_edge(i, 3))
           call reference_element%get_tangent_to_edge(i, unit_vec(:, idx))
           if (i <= number_2d_edges) dof_on_vert_boundary(idx, 1) = 0
-          if (i > number_edges - number_2d_edges) &
+          if (i > number_edges - number_2d_edges) then
             dof_on_vert_boundary(idx, 2) = 0
+          end if
           ! Label edge degrees of freedom
           entity_dofs(idx) = reference_element%get_edge_entity(i)
           idx = idx + 1

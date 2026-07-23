@@ -200,8 +200,9 @@ contains
     ierr=0 ! Set local variable to avoid unused variable errors
 #else
     call mpi_init(ierr)
-    if (ierr /= mpi_success) &
+    if (ierr /= mpi_success) then
           call log_event('Unable to initialise MPI', LOG_LEVEL_ERROR )
+    end if
     out_comm%comm = MPI_COMM_WORLD
 #endif
   end subroutine create_comm
@@ -218,8 +219,9 @@ contains
     ierr=0 ! Set local variable to avoid unused variable errors
 #else
     call mpi_finalize(ierr)
-    if (ierr /= mpi_success) &
+    if (ierr /= mpi_success) then
           call log_event('Unable to finalise MPI', LOG_LEVEL_ERROR )
+    end if
 #endif
   end subroutine destroy_comm
 
@@ -303,12 +305,14 @@ contains
 #else
     ! Duplicate the communicator  - so we can't do any damage to the original
     call mpi_comm_dup(in_comm%comm, self%comm, ierr)
-    if (ierr /= 0) &
+    if (ierr /= 0) then
       call log_event('Cannot duplicate the communicator.', LOG_LEVEL_ERROR )
+    end if
     ! Get the values for number of ranks and local rank
     call mpi_comm_size(self%comm, self%comm_size, ierr)
-    if (ierr /= 0) &
+    if (ierr /= 0) then
       call log_event('Cannot determine number of ranks.', LOG_LEVEL_ERROR )
+    end if
     call mpi_comm_rank(self%comm, self%comm_rank, ierr)
     if (ierr /= 0) call log_event('Cannot determine rank.', LOG_LEVEL_ERROR )
 #endif
@@ -327,8 +331,9 @@ contains
 #else
     if (self%comm_set) then
       call mpi_comm_free(self%comm, ierr)
-      if (ierr /= 0) &
+      if (ierr /= 0) then
         call log_event('Cannot free the duplicated MPI comm.', LOG_LEVEL_ERROR )
+      end if
     end if
 #endif
     self%comm_set = .false.
@@ -381,9 +386,10 @@ contains
       lfric_datatype =  get_lfric_datatype( real_type, real64 )
       call mpi_allreduce( l_sum, g_sum, 1, lfric_datatype%get_mpi_datatype(), &
                           mpi_sum, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to real global_sum failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to global_sum failed. Must initialise the mpi object first',&
@@ -421,9 +427,10 @@ contains
       lfric_datatype = get_lfric_datatype( real_type, real32)
       call mpi_allreduce( l_sum, g_sum, 1, lfric_datatype%get_mpi_datatype(), &
                           mpi_sum, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to real global_sum failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to global_sum failed. Must initialise the mpi object first',&
@@ -461,9 +468,10 @@ contains
       lfric_datatype = get_lfric_datatype( integer_type, int32 )
       call mpi_allreduce( l_sum, g_sum, 1, lfric_datatype%get_mpi_datatype(), &
                           mpi_sum, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to integer global_sum failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to global_sum failed. Must initialise the mpi object first',&
@@ -501,9 +509,10 @@ contains
       lfric_datatype = get_lfric_datatype( real_type, real64 )
       call mpi_allreduce( l_min, g_min, 1, lfric_datatype%get_mpi_datatype(), &
                           mpi_min, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to global_min failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to global_min failed. Must initialise the mpi object first',&
@@ -540,9 +549,10 @@ contains
       lfric_datatype = get_lfric_datatype( real_type, real32)
       call mpi_allreduce( l_min, g_min, 1, lfric_datatype%get_mpi_datatype(), &
                           mpi_min, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to global_min failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to global_min failed. Must initialise the mpi object first',&
@@ -580,9 +590,10 @@ contains
       lfric_datatype = get_lfric_datatype( integer_type, int32 )
       call mpi_allreduce( l_min, g_min, 1, lfric_datatype%get_mpi_datatype(), &
                           mpi_min, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to global_min failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to global_min failed. Must initialise the mpi object first',&
@@ -620,9 +631,10 @@ contains
       lfric_datatype = get_lfric_datatype( real_type, real64 )
       call mpi_allreduce( l_max, g_max, 1, lfric_datatype%get_mpi_datatype(), &
                           mpi_max, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to global_max failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to global_max failed. Must initialise the mpi object first',&
@@ -660,9 +672,10 @@ contains
       lfric_datatype = get_lfric_datatype( real_type, real32)
       call mpi_allreduce( l_max, g_max, 1, lfric_datatype%get_mpi_datatype(), &
                           mpi_max, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to global_max failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to global_max failed. Must initialise the mpi object first',&
@@ -700,9 +713,10 @@ contains
       lfric_datatype = get_lfric_datatype( integer_type, int32 )
       call mpi_allreduce( l_max, g_max, 1, lfric_datatype%get_mpi_datatype(), &
                           mpi_max, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to global_max failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to global_max failed. Must initialise the mpi object first',&
@@ -742,9 +756,10 @@ contains
       call mpi_allgather(send_buffer, count, lfric_datatype%get_mpi_datatype(), &
                          recv_buffer, count, lfric_datatype%get_mpi_datatype(), &
                          self%comm, err)
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to all_gather failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to all_gather failed. Must initialise the mpi object first',&
@@ -780,9 +795,10 @@ contains
     if(self%comm_set)then
       buffer_array(1) = buffer
       call mpi_bcast( buffer_array, 1, MPI_LOGICAL, root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to logical broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
       buffer = buffer_array(1)
     else
       call log_event( &
@@ -823,9 +839,10 @@ contains
       lfric_datatype = get_lfric_datatype( integer_type, int32 )
       call mpi_bcast( buffer_array, 1, lfric_datatype%get_mpi_datatype(), &
                       root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to integer broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
       buffer = buffer_array(1)
     else
       call log_event( &
@@ -867,9 +884,10 @@ contains
       call mpi_bcast( buffer_array, 1, &
                       lfric_datatype%get_mpi_datatype(), &
                       root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to real broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
       buffer = buffer_array(1)
     else
       call log_event( &
@@ -911,9 +929,10 @@ contains
       call mpi_bcast( buffer_array, 1, &
                       lfric_datatype%get_mpi_datatype(), &
                       root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to real broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
       buffer = buffer_array(1)
     else
       call log_event( &
@@ -949,9 +968,10 @@ contains
 #else
     if(self%comm_set)then
       call mpi_bcast( buffer, count, MPI_LOGICAL, root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to logical broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to broadcast failed. Must initialise the mpi object first',&
@@ -990,9 +1010,10 @@ contains
       lfric_datatype = get_lfric_datatype( integer_type, int32 )
       call mpi_bcast( buffer, count, lfric_datatype%get_mpi_datatype(), &
                       root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to integer broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to broadcast failed. Must initialise the mpi object first',&
@@ -1032,9 +1053,10 @@ contains
       call mpi_bcast( buffer, count, &
                       lfric_datatype%get_mpi_datatype(), &
                       root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to real broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to broadcast failed. Must initialise the mpi object first',&
@@ -1074,9 +1096,10 @@ contains
       call mpi_bcast( buffer, count, &
                       lfric_datatype%get_mpi_datatype(), &
                       root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to real broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to broadcast failed. Must initialise the mpi object first',&
@@ -1111,9 +1134,10 @@ contains
 #else
     if(self%comm_set)then
       call mpi_bcast( buffer, count, MPI_CHARACTER, root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to string broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to broadcast failed. Must initialise the mpi object first',&
@@ -1148,9 +1172,10 @@ contains
 #else
     if(self%comm_set)then
       call mpi_bcast( buffer, count, MPI_LOGICAL, root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to logical broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to broadcast failed. Must initialise the mpi object first',&
@@ -1189,9 +1214,10 @@ contains
       lfric_datatype = get_lfric_datatype( integer_type, int32 )
       call mpi_bcast( buffer, count, lfric_datatype%get_mpi_datatype(), &
                       root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to integer broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to broadcast failed. Must initialise the mpi object first',&
@@ -1231,9 +1257,10 @@ contains
       call mpi_bcast( buffer, count, &
                       lfric_datatype%get_mpi_datatype(), &
                       root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to real broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to broadcast failed. Must initialise the mpi object first',&
@@ -1273,9 +1300,10 @@ contains
       call mpi_bcast( buffer, count, &
                       lfric_datatype%get_mpi_datatype(), &
                       root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to real broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to broadcast failed. Must initialise the mpi object first',&
@@ -1310,9 +1338,10 @@ contains
 #else
     if(self%comm_set)then
       call mpi_bcast( buffer, count, MPI_LOGICAL, root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to logical broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to broadcast failed. Must initialise the mpi object first',&
@@ -1351,9 +1380,10 @@ contains
       lfric_datatype = get_lfric_datatype( integer_type, int32 )
       call mpi_bcast( buffer, count, lfric_datatype%get_mpi_datatype(), &
                       root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to integer broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to broadcast failed. Must initialise the mpi object first',&
@@ -1393,9 +1423,10 @@ contains
       call mpi_bcast( buffer, count, &
                       lfric_datatype%get_mpi_datatype(), &
                       root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to real broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to broadcast failed. Must initialise the mpi object first',&
@@ -1435,9 +1466,10 @@ contains
       call mpi_bcast( buffer, count, &
                       lfric_datatype%get_mpi_datatype(), &
                       root, self%comm, err )
-      if (err /= mpi_success) &
+      if (err /= mpi_success) then
         call log_event('Call to real broadcast failed with an MPI error.', &
                        LOG_LEVEL_ERROR )
+      end if
     else
       call log_event( &
       'Call to broadcast failed. Must initialise the mpi object first',&

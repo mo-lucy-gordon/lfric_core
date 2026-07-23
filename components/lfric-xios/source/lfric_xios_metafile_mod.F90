@@ -238,17 +238,19 @@ contains
         call xios_add_child(file, field, field_id)
 
 
-        if (.not. field_is_valid(field_id)) &
+        if (.not. field_is_valid(field_id)) then
           call log_event('internal error: added field invalid', log_level_error)
+        end if
 
         ! copy name and precision from dictionary field
         if (use_id_as_name) then
           field_name = dict_field_id ! correct for checkpointing
         else
           call xios_get_field_attr(dict_field_id, name=field_name)
-          if (field_name /= dict_field_id) &
+          if (field_name /= dict_field_id) then
             call log_event('internal error - mismatch: ' // trim(field_name) &
               // ' vs ' // trim(dict_field_id), log_level_warning)
+          end if
         end if
 
         prec = get_field_precision(dict_field_id, dflt_prec, lfric_dict)

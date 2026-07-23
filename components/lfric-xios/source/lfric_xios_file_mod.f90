@@ -278,8 +278,9 @@ function lfric_xios_file_constructor( file_name, xios_id, io_mode, freq,      &
   end if
 
   if (present(is_diag)) self%is_diag = is_diag
-  if (present(diag_always_on_sampling)) &
+  if (present(diag_always_on_sampling)) then
     self%diag_always_on_sampling = diag_always_on_sampling
+  end if
   return
 
 end function lfric_xios_file_constructor

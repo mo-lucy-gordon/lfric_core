@@ -68,9 +68,10 @@ contains
       write( log_scratch_space, &
              '("The following required namelists were not loaded:")' )
       do i = 1, size(required_namelists)
-        if (.not. success_map(i)) &
+        if (.not. success_map(i)) then
           log_scratch_space = trim(log_scratch_space) // ', ' &
                               // required_namelists(i)
+        end if
       end do
       call log_event( log_scratch_space, log_level_error )
     end if
